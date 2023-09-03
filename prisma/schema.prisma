@@ -11,18 +11,19 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  firstName String  @map("first_name")
-  lastName  String  @map("last_name")
-  email      String    @unique
-  password   String
-  image      String
-  phone      String
-  adress     String
-  cep        String
-  role       String
-  createdAt  DateTime  @default(now()) @map("created_at")
-  updatedAt  DateTime? @map("updated_at")
+  id        String    @id @default(uuid())
+  firstName String    @map("first_name")
+  lastName  String    @map("last_name")
+  email     String    @unique
+  password  String
+  image     String
+  phone     String
+  adress    String
+  cep       String
+  role      String
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  Order     Order[]
 
   @@map("users")
 }
@@ -37,6 +38,20 @@ model Product {
   category    String
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime? @map("updated_at")
+  Order       Order?    @relation(fields: [orderId], references: [id])
+  orderId     String?
 
   @@map("products")
+}
+
+model Order {
+  id        String    @id @default(uuid())
+  value     Int
+  user      User      @relation(fields: [userId], references: [id])
+  products  Product[]
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  userId    String
+
+  @@map("orders")
 }
