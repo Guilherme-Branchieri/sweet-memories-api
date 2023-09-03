@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  postgresql: 
+    container_name: sweet-memories
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: sweet-memories
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: sweet-memories
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
