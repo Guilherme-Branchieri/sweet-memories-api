@@ -1,18 +1,25 @@
-import { Controller, Post } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
+import { Controller, Post } from "@nestjs/common"
+import { JwtService } from "@nestjs/jwt"
+import { PrismaService } from "src/prisma/prisma.service"
 
-@Controller("/auth")
+// const createAccountBodySchema = z.object({
+//   name: z.string(),
+//   email: z.string().email(),
+//   password: z.string(),
+// })
+
+// type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
+
+@Controller("/sessions")
 export class AuthenticateController {
     constructor(private jwt: JwtService) { }
 
-    @Post("/login")
+    @Post()
+    // @HttpCode(201)
+    // @UsePipes(new ZodValidationPipe(createAccountBodySchema))
     async handle() {
-        const token = this.jwt.sign({
-            sub: "user-id"
-            //Todo: get user id
-        })
+        const token = this.jwt.sign({ sub: "user-id" })
+
         return token
     }
-
-
 }
