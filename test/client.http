@@ -1,25 +1,53 @@
 @baseUrl = http://localhost:3333
 
-# $@name create_account
-# POST {{baseUrl}}/accounts
-# Content-Type: application/json
+@authToken = {{authenticate.response.body.access_token}}
 
-# {
-#     "firstName": "Guilherme",
-#     "lastName": "Silveira",
-#     "email": "branchi@dev.com",
-#     "password": "123123123",
-#     "image": "",
-#     "phone": "54999999999",
-#     "adress": "Rua antares 857",
-#     "cep": "95076540",
-#     "role": "COMMON"
-# }
 
+###
+
+# @name create_account
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+    "firstName": "asd1231",
+    "lastName": "233213123",
+    "email": "brother154@test.com",
+    "password": "123123123",
+    "image": "",
+    "phone": "54999999999",
+    "adress": "Rua antares 857",
+    "cep": "95076540"
+}
+
+###
+
+# @name authenticate
 POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "branchieri@dev.com",
+    "email": "branchi@dev.com",
     "password": "123123123"
 }
+
+###
+
+# @name edit_user
+POST {{baseUrl}}/accounts/edit/4e6cf30c-3258-45bb-828e-c07107730625
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{   
+    "firstName": "Guilherme",
+	"lastName": "Silveira Branchieri",
+	"image": "https://gnosisbrasil.com/storage/2015/09/aleph.png",
+	"phone": "54991053056",
+	"adress": "Rua Manoel de Abreu 716",
+	"cep": "95074280"
+}
+	
+#4e6cf30c325845bb828ec07107730625
+#4e6cf30c-3258-45bb-828e-c07107730625
+
+
