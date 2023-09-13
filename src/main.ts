@@ -11,6 +11,6 @@ async function bootstrap() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const port = configService.get("PORT", {infer: true})
 
-  await app.listen(3333)
+  await app.listen(port)
 }
 bootstrap()
