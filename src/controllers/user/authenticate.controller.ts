@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UnauthorizedException } from "@nestjs/common"
+import { Controller, Post, Body, UnauthorizedException, HttpCode } from "@nestjs/common"
 import { JwtService } from "@nestjs/jwt"
 import { PrismaService } from "src/prisma/prisma.service"
 import { z } from "zod"
@@ -16,7 +16,7 @@ export class AuthenticateController {
     constructor(private jwt: JwtService, private prisma: PrismaService) { }
 
     @Post()
-    
+    @HttpCode(200)
     async handle(@Body() body: AuthenticateBodySchema) {
         const { email, password } = body
 
