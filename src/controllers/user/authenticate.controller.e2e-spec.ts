@@ -5,7 +5,7 @@ import request from "supertest"
 import { PrismaService } from "@/prisma/prisma.service";
 
 
-describe("Create account controller ", () => {
+describe("Authenticate User Controller", () => {
 
     let app: INestApplication
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,7 +21,7 @@ describe("Create account controller ", () => {
         prisma = moduleRef.get(PrismaService)
         await app.init();
     });
-    test("[POST] /accounts", async () => {
+    test("[POST] /sessions", async () => {
         await request(app.getHttpServer()).post("/accounts").send({
             firstName: "test",
             lastName: "boy",
