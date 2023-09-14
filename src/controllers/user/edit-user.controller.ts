@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Controller, Post, HttpCode, Body, UsePipes, UseGuards, Param, ValidationPipe, NotFoundException, } from "@nestjs/common";
+import { Controller, Post, HttpCode, Body, UseGuards, NotFoundException, } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod"
 import { JwtAuthGuard } from "@/auth/jwt-auth.guard";
@@ -45,7 +45,6 @@ export class EditUserController {
             updatedAt: new Date()
             
         }
-        console.log(newUser)
 
         return await this.prisma.user.update({
             data: newUser,
