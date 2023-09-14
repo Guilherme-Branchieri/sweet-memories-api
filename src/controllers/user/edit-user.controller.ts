@@ -3,6 +3,9 @@ import { Controller, Post, HttpCode, Body, UsePipes, UseGuards, Param, Validatio
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod"
 import { JwtAuthGuard } from "@/auth/jwt-auth.guard";
+import { CurrentUser } from "@/auth/current-user-decorator";
+import { UserPayload } from "@/auth/jwt-strategy";
+import { ZodValidationPipe } from "@/pipes/zod-validation-pipe";
 
 
 const EditUserBodySchema = z.object({
@@ -23,35 +26,30 @@ export class EditUserController {
     constructor(private prisma: PrismaService) {
     }
 
-    @Post("/edit/:id")
+    @Post("/edit")
     @HttpCode(204)
-    @UsePipes(
-        new ValidationPipe({
-            transform: true,
-            skipMissingProperties: true,
-            whitelist: true
-        }))
-    async handle(@Param("id") id: string, @Body() body: EditUserBodySchema) {
-        const user = await this.prisma.user.findUnique({
-            where: { id }
-        })
+    async handle(@CurrentUser() userPayload: UserPayload, @Body(new ZodValidationPipe(EditUserBodySchema)) body: EditUserBodySchema) {
 
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id: userPayload.sub
+            }
+        })
         if (!user) {
             throw new NotFoundException("Credencials don't match")
         }
 
         const newUser = {
-            firstName: body.firstName ?? body.firstName,
-            lastName: body.lastName ?? body.lastName,
-            image: body.image ?? body.lastName,
-            phone: body.phone ?? body.phone,
-            adress: body.adress ?? body.adress,
-            cep: body.adress ?? body.adress
+            ...user,
+            ...body,
+            updatedAt: new Date()
+            
         }
+        console.log(newUser)
 
-        await this.prisma.user.update({
+        return await this.prisma.user.update({
             data: newUser,
-            where: { id },
+            where: { id: userPayload.sub },
         })
     }
 }
