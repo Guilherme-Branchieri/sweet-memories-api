@@ -5,7 +5,6 @@ import { UsersRepository } from "../users.repository";
 export class PrismaUsersRepository implements UsersRepository {
     constructor(private prisma: PrismaService) { }
 
-
     async findById(id: string): Promise<User | null> {
         const user = await this.prisma.user.findUnique({
             where: {
