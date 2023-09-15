@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Controller, Post, HttpCode, Body, ConflictException, UsePipes } from "@nestjs/common";
+import { Controller, Post, HttpCode, Body, UsePipes } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
-import { hash } from "bcryptjs"
 import { z } from "zod"
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
+import { MakeCreateUserUseCase } from "../use-cases/factories/make-create-user-use-case";
 
 const CreateAccountBodySchema = z.object({
     firstName: z.string(),
@@ -19,7 +18,6 @@ const CreateAccountBodySchema = z.object({
 
 type CreateAccountBodySchema = z.infer<typeof CreateAccountBodySchema>
 
-
 @Controller("/accounts")
 export class CreateAccountController {
     constructor(private prisma: PrismaService) { }
@@ -30,28 +28,19 @@ export class CreateAccountController {
     async handle(@Body() body: CreateAccountBodySchema) {
 
         const { firstName, lastName, email, password, image, phone, adress, cep } = CreateAccountBodySchema.parse(body);
-        const emailAlreadyRegistered = await this.prisma.user.findUnique({
-            where: {
-                email
-            }
+
+        const createUserUseCase = MakeCreateUserUseCase()
+
+        await createUserUseCase.execute({
+            firstName,
+            lastName,
+            email,
+            password,
+            image,
+            phone,
+            adress,
+            cep
         })
 
-        if (emailAlreadyRegistered) {
-            throw new ConflictException("Email already registered")
-        }
-
-        const passwodHash = await hash(password, 8)
-        await this.prisma.user.create({
-            data: {
-                firstName,
-                lastName,
-                email,
-                password: passwodHash,
-                image,
-                phone,
-                adress,
-                cep,
-            }
-        })
     }
 }
