@@ -6,6 +6,7 @@ import { JwtAuthGuard } from "@/auth/jwt-auth.guard";
 import { CurrentUser } from "@/auth/current-user-decorator";
 import { UserPayload } from "@/auth/jwt-strategy";
 import { ZodValidationPipe } from "@/pipes/zod-validation-pipe";
+import { EditUserDto } from "../dtos/edit-user.dto";
 
 
 const EditUserBodySchema = z.object({
@@ -28,7 +29,7 @@ export class EditUserController {
 
     @Post("/edit")
     @HttpCode(204)
-    async handle(@CurrentUser() userPayload: UserPayload, @Body(new ZodValidationPipe(EditUserBodySchema)) body: EditUserBodySchema) {
+    async handle(@CurrentUser() userPayload: UserPayload, @Body(new ZodValidationPipe(EditUserBodySchema)) body: EditUserDto) {
 
         const user = await this.prisma.user.findUnique({
             where: {

@@ -3,6 +3,7 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod"
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
 import { MakeCreateUserUseCase } from "../use-cases/factories/make-create-user-use-case";
+import {CreateUserDto} from "../dtos/create-user.dto";
 
 const CreateAccountBodySchema = z.object({
     firstName: z.string(),
@@ -25,7 +26,7 @@ export class CreateAccountController {
     @Post()
     @HttpCode(201)
     @UsePipes(new ZodValidationPipe(CreateAccountBodySchema))
-    async handle(@Body() body: CreateAccountBodySchema) {
+    async handle(@Body() body: CreateUserDto) {
 
         const { firstName, lastName, email, password, image, phone, adress, cep } = CreateAccountBodySchema.parse(body);
 
