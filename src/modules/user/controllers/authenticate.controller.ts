@@ -4,7 +4,7 @@ import { PrismaService } from "src/prisma/prisma.service"
 import { z } from "zod"
 import { compare } from "bcryptjs"
 import { AuthenticateUserDto } from "../dtos/authenticate-user.dto"
-import { ZodValidationPipe } from "@/pipes/zod-validation-pipe"
+import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe"
 
 const AuthenticateBodySchema = z.object({
     email: z.string().email(),

@@ -2,10 +2,10 @@
 import { Controller, Post, HttpCode, Body, UseGuards, NotFoundException, } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod"
-import { JwtAuthGuard } from "@/auth/jwt-auth.guard";
-import { CurrentUser } from "@/auth/current-user-decorator";
-import { UserPayload } from "@/auth/jwt-strategy";
-import { ZodValidationPipe } from "@/pipes/zod-validation-pipe";
+import { JwtAuthGuard } from "@/modules/auth/jwt-auth.guard";
+import { CurrentUser } from "@/modules/auth/current-user-decorator";
+import { UserPayload } from "@/modules/auth/jwt-strategy";
+import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe";
 import { EditUserDto } from "../dtos/edit-user.dto";
 
 
@@ -44,7 +44,7 @@ export class EditUserController {
             ...user,
             ...body,
             updatedAt: new Date()
-            
+
         }
 
         return await this.prisma.user.update({

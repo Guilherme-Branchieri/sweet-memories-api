@@ -1,9 +1,9 @@
 import { Controller, Post, HttpCode, Body, UsePipes } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from "zod"
-import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
+import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe";
 import { MakeCreateUserUseCase } from "../use-cases/factories/make-create-user-use-case";
-import {CreateUserDto} from "../dtos/create-user.dto";
+import { CreateUserDto } from "../dtos/create-user.dto";
 
 const CreateAccountBodySchema = z.object({
     firstName: z.string(),
