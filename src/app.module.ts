@@ -6,6 +6,7 @@ import { envSchema } from "./config/env.config";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthenticateController } from "@/modules/user/controllers/authenticate.controller";
 import { EditUserController } from "@/modules/user/controllers/edit-user.controller";
+import { AuthService } from "./modules/auth/auth.service";
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -13,6 +14,6 @@ import { EditUserController } from "@/modules/user/controllers/edit-user.control
     isGlobal: true
   }), AuthModule],
   controllers: [CreateAccountController, AuthenticateController, EditUserController],
-  providers: [PrismaService],
+  providers: [PrismaService, AuthService],
 })
 export class AppModule { }

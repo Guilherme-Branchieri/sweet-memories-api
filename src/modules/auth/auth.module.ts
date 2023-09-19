@@ -4,6 +4,7 @@ import { JwtModule } from "@nestjs/jwt"
 import { PassportModule } from "@nestjs/passport"
 import { Env } from "@/config/env.config"
 import { JwtStrategy } from "./jwt-strategy"
+import { AuthenticateController } from "../user/controllers/authenticate.controller"
 
 @Module({
     imports: [
@@ -19,11 +20,13 @@ import { JwtStrategy } from "./jwt-strategy"
                     signOptions: { algorithm: "RS256" },
                     privateKey: Buffer.from(privateKey, "base64"),
                     publicKey: Buffer.from(publicKey, "base64"),
-                    global: true
+                    global: true,
                 }
             },
         }),
     ],
-    providers: [JwtStrategy]
+    controllers: [AuthenticateController],
+    providers: [JwtStrategy],
+
 })
 export class AuthModule { }
