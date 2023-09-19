@@ -74,7 +74,7 @@ describe("Create User Use Case", () => {
         ).rejects.toBeInstanceOf(ConflictException)
     })
 
-    it("Shoud be able to hash a password", async () => {
+    it("Shoud be able to correctly hash user password", async () => {
         const mockUser = {
             id: "tester01",
             firstName: "test",

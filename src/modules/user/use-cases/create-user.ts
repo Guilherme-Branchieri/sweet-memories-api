@@ -4,6 +4,7 @@ import { ConflictException } from "@nestjs/common";
 import { hash } from "bcryptjs";
 
 type CreateUserUseCaseRequest = {
+    id?: string
     firstName: string
     lastName: string
     email: string
