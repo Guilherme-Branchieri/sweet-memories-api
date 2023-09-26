@@ -13,8 +13,10 @@ export class PrismaProductsRepository implements ProductsRepository {
         return product
 
     }
-    async findAll(): Promise<Product[]> {
-        const products = await this.prisma.product.findMany()
+    async findAll(page?: number): Promise<Product[]> {
+        const defaultPage = 1
+        const currentPage = page ?? defaultPage
+        const products = (await this.prisma.product.findMany({take: 20, skip: (currentPage -1) * 20}))
 
         return products
     }
@@ -22,8 +24,10 @@ export class PrismaProductsRepository implements ProductsRepository {
         const product = await this.prisma.product.findUnique({ where: { id } })
         return product
     }
-    async findAllByCategory(category: string) {
-        const productsByCategory = await this.prisma.product.findMany({ where: { category: category } })
+    async findAllByCategory(category: string, page?: number) {
+        const defaultPage = 1
+        const currentPage = page ?? defaultPage
+        const productsByCategory = (await this.prisma.product.findMany({ where: { category: category }, take: 20, skip: (currentPage - 1) * 20 }))
         return productsByCategory
 
     }

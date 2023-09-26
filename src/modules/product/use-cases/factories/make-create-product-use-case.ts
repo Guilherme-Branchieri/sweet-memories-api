@@ -1,4 +1,4 @@
-import { CreateProductUseCase } from "../create";
+import { CreateProductUseCase } from "../create.product";
 import { PrismaService } from "@/prisma/prisma.service";
 import { PrismaProductsRepository } from "../../repositories/prisma/prisma-products.repository";
 
