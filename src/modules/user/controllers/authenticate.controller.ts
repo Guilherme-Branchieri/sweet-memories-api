@@ -1,6 +1,6 @@
 import { Controller, Post, Body, HttpCode } from "@nestjs/common"
 import { z } from "zod"
-import { AuthenticateUserDto } from "../dtos/authenticate-user.dto"
+import { AuthenticateUserDto } from "../dtos/authenticate.dto"
 import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe"
 import { MakeAuthenticateUseCase } from "../use-cases/factories/make-authenticate-use-case"
 import { ConfigService } from "@nestjs/config"
@@ -23,12 +23,12 @@ export class AuthenticateController {
 
         const authenticateUseCase = MakeAuthenticateUseCase(this.config)
 
-        const { token } = await authenticateUseCase.execute({
+        const { access_token, refresh_token } = await authenticateUseCase.execute({
             email,
             password
         })
 
-        return {access_token: token}
+        return {access_token, refresh_token}
 
     }
 }

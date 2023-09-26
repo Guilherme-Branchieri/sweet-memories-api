@@ -4,5 +4,5 @@ export type UsersRepository = {
     create(data: Prisma.UserCreateInput): Promise<User>;
     findByEmail(email: string): Promise<User | null>;
     findById(id: string): Promise<User | null>;
-    editUser(data: Prisma.UserUpdateInput): Promise<void>
+    edit(data: Prisma.UserUpdateInput): Promise<void>
 }

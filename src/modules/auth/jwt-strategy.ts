@@ -4,10 +4,12 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { z } from "zod";
+import { ROLE } from "@prisma/client";
 
 
 const tokenPayloadSchema = z.object({
     sub: z.string().uuid(),
+    role: z.nativeEnum(ROLE)
 })
 
 export type UserPayload = z.infer<typeof tokenPayloadSchema>
@@ -25,6 +27,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: UserPayload) {
-        return tokenPayloadSchema.parse(payload)
+        return {
+            sub: payload.sub,
+            role: payload.role,
+        }
     }
+
 }

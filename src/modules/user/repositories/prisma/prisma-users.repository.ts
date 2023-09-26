@@ -29,7 +29,7 @@ export class PrismaUsersRepository implements UsersRepository {
         return user;
     }
 
-    async editUser(data: Prisma.UserUncheckedCreateInput): Promise<void> {
+    async edit(data: Prisma.UserUncheckedCreateInput): Promise<void> {
         await this.prisma.user.update({
             data,
             where: {

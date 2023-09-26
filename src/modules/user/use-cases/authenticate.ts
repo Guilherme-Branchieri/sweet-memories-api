@@ -9,7 +9,8 @@ type AuthenticateUseCaseRequest = {
 }
 
 type AuthenticateUseCaseResponse = {
-    token: string
+    access_token: string
+    refresh_token: string
 }
 
 
@@ -32,8 +33,8 @@ export class AuthenticateUseCase {
             throw new UnauthorizedException("Invalid user credentials")
         }
 
-        const token = this.jwtService.generateJwtToken(user)
-        return { token }
+        const {accessToken, refreshToken} = this.jwtService.generateJwtToken(user)
+        return { access_token: accessToken, refresh_token: refreshToken }
 
     }
 }

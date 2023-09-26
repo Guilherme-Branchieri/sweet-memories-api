@@ -1,10 +1,10 @@
 import { PrismaUsersRepository } from "../../repositories/prisma/prisma-users.repository";
-import { CreateUserUseCase } from "../create";
 import { PrismaService } from "@/prisma/prisma.service";
+import { EditUseCase } from "../edit";
 
-export function MakeCreateUserUseCase() {
+export function MakeEditUseCase() {
     const usersRepository = new PrismaUsersRepository(new PrismaService)
-    const createUserUseCase = new CreateUserUseCase(usersRepository)
+    const editUseCase = new EditUseCase(usersRepository)
 
-    return createUserUseCase
+    return editUseCase
 }

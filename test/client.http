@@ -10,14 +10,15 @@ POST {{baseUrl}}/accounts
 Content-Type: application/json
 
 {
-    "firstName": "asd1231",
-    "lastName": "233213123",
-    "email": "brother1484@test.com",
+    "firstName": "branchieri",
+    "lastName": "ADMIN",
+    "email": "branchi@dev.com",
     "password": "123123123",
     "image": "",
     "phone": "54999999999",
     "adress": "Rua antares 857",
-    "cep": "95076540"
+    "cep": "95076540",
+    "role": "ADMIN"
 }
 
 ###
@@ -27,7 +28,7 @@ POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-    "email": "branchi@dev.com",
+    "email": "branchieri@admin.com",
     "password": "123123123"
 }
 
@@ -45,6 +46,22 @@ Authorization: Bearer {{authToken}}
 	"phone": "54991053056",
 	"adress": "Rua Manoel de Abreu 716",
 	"cep": "95074280"
+}
+
+###
+
+# @name create_product
+POST {{baseUrl}}/products/create/
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{   
+    "name": "Difusor de teste 12",
+    "price": 4.50,
+    "description": "Lindo difusor pra testar essa funcionalidade de criação",
+    "images": ["wwww.minha-imagem.com"],
+    "available": true,
+    "category": "casamento"
 }
 	
 

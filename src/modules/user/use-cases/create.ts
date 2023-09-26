@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { ROLE, User } from "@prisma/client";
 import { UsersRepository } from "../repositories/users.repository";
 import { ConflictException } from "@nestjs/common";
 import { hash } from "bcryptjs";
@@ -9,10 +9,11 @@ type CreateUserUseCaseRequest = {
     lastName: string
     email: string
     password: string
-    image: string
+    image?: string
     phone: string
     adress: string
-    cep: string
+    cep: string,
+    role?: ROLE
 
 }
 
@@ -21,19 +22,20 @@ type CreateUserUseCaseResponse = {
 }
 
 
-
 export class CreateUserUseCase {
     constructor(private usersRepository: UsersRepository) { }
 
     async execute({
+        id,
         firstName,
         lastName,
         email,
         password,
         image,
         phone,
-        adress,
+        adress,   
         cep,
+        role
     }: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
 
         const emailAlreadyRegistered = await this.usersRepository.findByEmail(email)
@@ -44,6 +46,7 @@ export class CreateUserUseCase {
         const passwodHash = await hash(password, 8)
 
         const user = await this.usersRepository.create({
+            id: id?? id,
             firstName,
             lastName,
             email,
@@ -52,8 +55,9 @@ export class CreateUserUseCase {
             phone,
             adress,
             cep,
+            role
         })
 
-        return { user }
+        return {user}
     }
 }

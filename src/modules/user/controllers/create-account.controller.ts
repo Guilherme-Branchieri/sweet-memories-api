@@ -2,9 +2,10 @@ import { Controller, Post, HttpCode, Body, UsePipes } from "@nestjs/common";
 import { z } from "zod"
 import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe";
 import { MakeCreateUserUseCase } from "../use-cases/factories/make-create-user-use-case";
-import { CreateUserDto } from "../dtos/create-user.dto";
+import { CreateUserDto } from "../dtos/create.dto";
 
 const CreateAccountBodySchema = z.object({
+    id: z.string().optional(),
     firstName: z.string(),
     lastName: z.string(),
     email: z.string().email(),
