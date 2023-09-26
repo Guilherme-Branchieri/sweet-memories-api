@@ -6,15 +6,12 @@ type findAllByCategoryUseCaseRequest = {
     page?: number
 }
 
-type findAllByCategoryUseCaseResponse = {
-    products: Product[]
-}
 export class FindAllByCategoryUseCase {
     constructor(private productsRepository: ProductsRepository) { }
 
-    async execute({category, page}: findAllByCategoryUseCaseRequest): Promise<findAllByCategoryUseCaseResponse> {
-        const products = await this.productsRepository.findAllByCategory(category, page)
+    async execute({ category, page }: findAllByCategoryUseCaseRequest): Promise<Product[]> {
+        const products = await this.productsRepository.findAllByCategory(category, page?? page)
 
-        return {products}
+        return products
     }
 }

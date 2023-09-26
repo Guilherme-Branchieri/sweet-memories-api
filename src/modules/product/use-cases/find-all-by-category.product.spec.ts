@@ -55,8 +55,9 @@ describe("Find All Product By Category Use Case", () => {
             })
         }
 
-        const products = await findAllByCategoryUseCase.execute({category: "casamento"})
+        const products = await findAllByCategoryUseCase.execute({ category: "casamento", page: 20 })
         expect(products).toEqual(expect.any(Array));
+        expect(products.map((products) => products.category === "casamento")).toBeTruthy()
     })
 
 })
