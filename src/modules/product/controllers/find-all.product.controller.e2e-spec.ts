@@ -21,7 +21,7 @@ describe("Find All Product Controller ", () => {
         prisma = moduleRef.get(PrismaService)
         await app.init();
     });
-    test("[GET] /products/list", async () => {
+    test("[GET] /products/list/all", async () => {
         for (let i = 1; i < 21; i++) {
             await prisma.product.createMany({
                 data: {
@@ -35,7 +35,7 @@ describe("Find All Product Controller ", () => {
                 }
             })
         }
-        const response = await request(app.getHttpServer()).get("/products/list").send()
+        const response = await request(app.getHttpServer()).get("/products/list/all").send()
         const products = response.body
         console.log(products)
         expect(products).toEqual(expect.any(Array<Product>))

@@ -4,9 +4,9 @@ import { MakeFindAllProductUseCase } from "../use-cases/factories/make-find-all-
 // import { UserPayload } from "@/modules/auth/jwt-strategy";
 
 
-@Controller("/products")
+@Controller("/products/list")
 export class FindAllProductController {
-    @Get("/list")
+    @Get("/all")
     @HttpCode(200)
     async handle() {
         const findAllProductUseCase = MakeFindAllProductUseCase()

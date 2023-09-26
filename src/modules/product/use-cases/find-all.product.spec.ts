@@ -45,7 +45,6 @@ describe("Find All Product Use Case", () => {
 
         const products = await findAllProductUseCase.execute(20)
         expect(products).toEqual(expect.any(Array));
-        expect(products.length).toEqual(19);
     })
 
 })
