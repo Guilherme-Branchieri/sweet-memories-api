@@ -1,6 +1,6 @@
 import { JwtService } from "@nestjs/jwt";
 import { PrismaUsersRepository } from "../../repositories/prisma/prisma-users.repository";
-import { AuthenticateUseCase } from "../authenticate";
+import { AuthenticateUseCase } from "../authenticate.user";
 import { PrismaService } from "@/prisma/prisma.service";
 import { AuthService } from "@/modules/auth/auth.service";
 import { ConfigService } from "@nestjs/config";

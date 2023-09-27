@@ -30,7 +30,8 @@ describe("Edit Product Use Case", () => {
     })
     it("Shoud be able to edit an existing product", async () => {
 
-        const {product} = await createProductUseCase.execute({
+        await createProductUseCase.execute({
+            id: "product01",
             name: "Difusor de teste",
             price: 4.50,
             description: "Lindo difusor pra testar essa funcionalidade de criação",
@@ -40,7 +41,7 @@ describe("Edit Product Use Case", () => {
         })
 
         const data = {
-            id: product.id,
+            id: "product01",
             name: "Vela",
             price: 8.00,
             available: false,
