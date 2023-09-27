@@ -82,6 +82,17 @@ Authorization: Bearer {{authToken}}
         "category": "batizado"
     }
 }
-	
+
+###
+
+# @name delete_product
+POST {{baseUrl}}/products/delete/
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{   
+    "id": "product01"
+}
+
 
 
