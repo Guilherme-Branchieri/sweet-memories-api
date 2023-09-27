@@ -16,12 +16,15 @@ export class PrismaProductsRepository implements ProductsRepository {
     async findAll(page?: number): Promise<Product[]> {
         const defaultPage = 1
         const currentPage = page ?? defaultPage
-        const products = (await this.prisma.product.findMany({take: 20, skip: (currentPage -1) * 20}))
+        const products = (await this.prisma.product.findMany({ take: 20, skip: (currentPage - 1) * 20 }))
 
         return products
     }
     async findById(id: string): Promise<Product | null> {
         const product = await this.prisma.product.findUnique({ where: { id } })
+        if (!product) {
+            return null
+        }
         return product
     }
     async findAllByCategory(category: string, page?: number) {
@@ -50,7 +53,7 @@ export class PrismaProductsRepository implements ProductsRepository {
 
     async delete(id: string): Promise<void> {
         await this.prisma.product.delete({
-            where: { id: id }
+            where: { id }
         })
     }
 }
