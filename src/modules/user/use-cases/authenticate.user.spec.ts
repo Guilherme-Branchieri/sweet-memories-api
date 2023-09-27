@@ -2,8 +2,8 @@ import { Test } from "@nestjs/testing";
 import { AppModule } from "@/app.module";
 import { INestApplication, UnauthorizedException } from "@nestjs/common";
 import { InMemoryUsersRepository } from "../repositories/in-memory/in-memory-users.repository";
-import { CreateUserUseCase } from "./create";
-import { AuthenticateUseCase } from "./authenticate";
+import { CreateUserUseCase } from "./create.user";
+import { AuthenticateUseCase } from "./authenticate.user";
 import { JwtService } from "@nestjs/jwt";
 import { AuthService } from "@/modules/auth/auth.service";
 

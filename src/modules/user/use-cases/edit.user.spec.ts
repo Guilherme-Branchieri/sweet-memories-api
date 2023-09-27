@@ -2,8 +2,8 @@ import { Test } from "@nestjs/testing";
 import { AppModule } from "@/app.module";
 import { INestApplication } from "@nestjs/common";
 import { InMemoryUsersRepository } from "../repositories/in-memory/in-memory-users.repository";
-import { CreateUserUseCase } from "./create";
-import { EditUseCase } from "./edit";
+import { CreateUserUseCase } from "./create.user";
+import { EditUseCase } from "./edit.user";
 
 
 describe("Edit User Use Case", () => {

@@ -2,7 +2,7 @@ import { Test } from "@nestjs/testing";
 import { AppModule } from "@/app.module";
 import { ConflictException, INestApplication } from "@nestjs/common";
 import { InMemoryUsersRepository } from "../repositories/in-memory/in-memory-users.repository";
-import { CreateUserUseCase } from "./create";
+import { CreateUserUseCase } from "./create.user";
 import { compare } from "bcryptjs";
 
 
