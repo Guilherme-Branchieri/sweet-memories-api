@@ -1,7 +1,7 @@
 import { Controller, Post, HttpCode, Body, UseGuards } from "@nestjs/common";
 import { z } from "zod"
 import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe";
-import { CreateProductDto } from "../dtos/create.dto";
+import { CreateProductDto } from "../dtos/create.product.dto";
 import { MakeCreateProductUseCase } from "../use-cases/factories/make-create-product-use-case";
 // import { CurrentUser } from "@/common/decorators/current-user-decorator";
 // import { UserPayload } from "@/modules/auth/jwt-strategy";
@@ -12,7 +12,7 @@ import { RolesGuard } from "@/common/guards/roles.guard";
 
 const CreateProductBodySchema = z.object({
     id: z.string().optional(),
-    name: z.string().nonempty(),
+    name: z.string(),
     description: z.string(),
     price: z.number(),
     images: z.array(z.string()),
