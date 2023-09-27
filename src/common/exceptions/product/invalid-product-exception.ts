@@ -2,6 +2,6 @@ import { ConflictException } from "@nestjs/common";
 
 export class InvalidProductException extends ConflictException {
     constructor() {
-        super("Invalid product format or product already registered")
+        super("Invalid product format")
     }
 }
