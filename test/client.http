@@ -63,6 +63,25 @@ Authorization: Bearer {{authToken}}
     "available": true,
     "category": "casamento"
 }
+
+###
+
+# @name edit_product
+POST {{baseUrl}}/products/edit/
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{   
+    "data": {
+        "id": "product01",
+        "name": "vela",
+        "price": 8.00,
+        "description": "Linda vela",
+        "images": ["wwww.minha-imagem.com"],
+        "available": false,
+        "category": "batizado"
+    }
+}
 	
 
 
