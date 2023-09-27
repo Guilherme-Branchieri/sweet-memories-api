@@ -1,9 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
-import { IsArray, IsBoolean, IsDate, IsNumber, IsString } from "class-validator"
+import { IsArray, IsBoolean, IsDate, IsNumber, IsOptional, IsString } from "class-validator"
 
 export class CreateProductDto {
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
     id!: string;
 

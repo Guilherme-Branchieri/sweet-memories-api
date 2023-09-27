@@ -37,7 +37,6 @@ describe("Find All Product Controller ", () => {
         }
         const response = await request(app.getHttpServer()).get("/products/list/all").send()
         const products = response.body
-        console.log(products)
         expect(products).toEqual(expect.any(Array<Product>))
         expect(products).toHaveLength(20)
     })
