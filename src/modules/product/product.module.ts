@@ -5,9 +5,10 @@ import { FindAllProductController } from "./controllers/find-all.product.control
 import { FindAllProductByCategoryController } from "./controllers/find-all-by-category.product.controller"
 import { EditProductController } from "./controllers/edit.product.controller"
 import { DeleteProductController } from "./controllers/delete.product.controller"
+import { AuthModule } from "../auth/auth.module"
 
 @Module({
-    imports: [],
+    imports: [AuthModule],
     controllers: [
         CreateProductController,
         FindAllProductController,
