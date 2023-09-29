@@ -6,7 +6,7 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger"
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-
+  app.enableCors({ origin: "https://localhost/3000" })
   const configService: ConfigService<Env, true> = app.get(ConfigService)
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
