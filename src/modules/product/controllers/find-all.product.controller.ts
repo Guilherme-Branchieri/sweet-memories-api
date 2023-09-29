@@ -6,7 +6,7 @@ import { MakeFindAllProductUseCase } from "../use-cases/factories/make-find-all-
 
 @Controller("/products/list")
 export class FindAllProductController {
-    @Get("/all")
+    @Get()
     @HttpCode(200)
     async handle() {
         const findAllProductUseCase = MakeFindAllProductUseCase()

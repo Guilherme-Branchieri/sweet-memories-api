@@ -94,5 +94,11 @@ Authorization: Bearer {{authToken}}
     "id": "product01"
 }
 
+###
+
+# @name find_all_product
+
+GET {{baseUrl}}/products/list
+Content-Type: application/json
 
 
