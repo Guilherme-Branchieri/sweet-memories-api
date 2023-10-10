@@ -8,6 +8,7 @@ import { ZodValidationPipe } from "@/common/pipes/zod-validation-pipe";
 import { EditUserDto } from "../dtos/edit.dto";
 import { MakeEditUseCase } from "../use-cases/factories/make-edit-user-use-case";
 import { RolesGuard } from "@/common/guards/roles.guard";
+import { Roles } from "@/common/decorators/roles.decorator";
 const EditUserBodySchema = z.object({
     firstName: z.string().optional(),
     lastName: z.string().optional(),
@@ -24,9 +25,9 @@ type EditUserBodySchema = z.infer<typeof EditUserBodySchema>
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class EditController {
 
-
     @Post("/edit")
     @HttpCode(204)
+    @Roles("ADMIN", "COMMON")
     async handle(@CurrentUser() userPayload: UserPayload, @Body(new ZodValidationPipe(EditUserBodySchema)) body: EditUserDto) {
         if (!userPayload) {
             throw new UnauthorizedException("Invalid authorization credentials")

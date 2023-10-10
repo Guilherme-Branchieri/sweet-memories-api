@@ -43,10 +43,6 @@ describe("Delete Product Use Case", () => {
         expect(product).toEqual(expect.any(Object))
 
         await deleteProductUseCase.execute(product.id)
-
-        const findProduct = productsRepository.products.find((product) => product)
-        console.log(findProduct)
-
         expect(productsRepository.products[0]).toBeFalsy()
     })
 
