@@ -1,11 +1,10 @@
 import { Order, ROLE } from "@prisma/client"
 
-export type UserEntity = {
+export type UserWithoutPasswordEntity = {
     id: string
     firstName: string
     lastName: string
     email: string
-    password: string
     image: string | null
     phone: string
     adress: string
