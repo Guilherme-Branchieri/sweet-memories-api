@@ -1,6 +1,6 @@
-import { Order, ROLE } from "@prisma/client"
+import { ROLE } from "@prisma/client"
 
-export type UserEntity = {
+export type User = {
     id: string
     firstName: string
     lastName: string
@@ -10,8 +10,5 @@ export type UserEntity = {
     phone: string
     adress: string
     cep: string
-    role: ROLE | null
-    createdAt: Date
-    updatedAt: Date | null
-    order?: Order[] | null
+    role: ROLE
 }
